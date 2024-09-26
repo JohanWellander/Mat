@@ -1,10 +1,9 @@
 import os
 import argparse
-from food_list import FoodList, Livsmedelsverket
+from food_list_windows import FoodList, Livsmedelsverket
 
 def main():
     # Parse command-line arguments
-    print("LEEEEETS GOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!")
     parser = argparse.ArgumentParser(description="Manage your food list")
     parser.add_argument('--delete', nargs='+', help='Item(s) to delete from the food list')
     parser.add_argument('--add', nargs='+', help='Item(s) to add to the food list')
@@ -27,18 +26,22 @@ def main():
 
     else:
         # Perform your regular script actions here if no command-line arguments are provided
-        print("No command provided. Adding food from receipts...")
-
+        print("No command provided. Adding food from reciepts...")
+        # Your existing code for processing receipts and saving items
+        dir = os.getcwd()
+        main_list = FoodList()
+        
         # Read file from livsmedelverket
-        file_name = "Livsmedel.xlsx"  # Assuming this file is in the current working directory
+        file_name = "/Livsmedel.xlsx"
         livsmedelslista = Livsmedelsverket()
-        livsmedelslista.read_excel_file(os.path.join(os.getcwd(), file_name))
+        livsmedelslista.read_excel_file(dir + file_name)
         livsmedelslista.clean()
         
         # Read food from receipt and compare with reference
-        for kvitto in os.listdir(os.path.join(os.getcwd(), "kvitton")):
+        tess_path = r'C:/Users/johwel01/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
+        for kvitto in os.listdir(dir + "/kvitton"):
             new_list = FoodList()
-            new_list.read_receipt(os.path.join(os.getcwd(), "kvitton"), kvitto)
+            new_list.read_receipt(dir + "/kvitton", kvitto, tess_path)
             main_list.add_item(livsmedelslista.filter_food(new_list.grocery_list))
 
         # Save new items to the Excel file
