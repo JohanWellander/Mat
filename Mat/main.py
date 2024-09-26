@@ -11,6 +11,7 @@ def main():
 
     # Initialize FoodList instance
     file_path = os.path.join(os.getcwd(), "main_food_list.xlsx")
+    print(file_path)
     main_list = FoodList()
 
     # If --delete is provided, delete the specified items
