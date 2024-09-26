@@ -23,7 +23,7 @@ pipeline {
                 echo "Testing.."
                 sh '''
                 cd Mat
-                python3 test.py
+                python3 main.py
                
                 '''
             }
