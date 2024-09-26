@@ -14,6 +14,7 @@ pipeline {
                 sh '''
                 ls
                 cd Mat
+                pip install pytesseract
                 pip install -r requirements.txt
                 '''
             }
