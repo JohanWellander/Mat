@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                cd MAT
+                cd Mat
                 pip install -r requirements.txt
                 '''
             }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                cd MAT
+                cd Mat
                 python3 main.py
                 python3 hello.py --add=lingon
                 '''
