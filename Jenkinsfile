@@ -22,8 +22,8 @@ pipeline {
                 echo "Testing.."
                 sh '''
                 cd Mat
-                python3 main.py
-                python3 hello.py --add=lingon
+                python3 test.py
+               
                 '''
             }
         }
