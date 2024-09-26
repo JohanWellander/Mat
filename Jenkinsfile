@@ -14,6 +14,8 @@ pipeline {
                 sh '''
                 ls
                 cd Mat
+                sudo apt-get update
+                sudo apt-get install zlib1g-dev
                 pip install pytesseract
                 pip install -r requirements.txt
                 '''
