@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
+                ls
                 cd Mat
                 pip install -r requirements.txt
                 '''
