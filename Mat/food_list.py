@@ -1,4 +1,4 @@
-import tesseract
+#import tesseract
 from PIL import Image
 import os
 import csv
