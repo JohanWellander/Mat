@@ -2,6 +2,7 @@ FROM jenkins/jenkins:2.414.2-jdk11
 USER root
 RUN apt-get update && apt-get install -y lsb-release python3-pip
 RUN apt-get update && apt-get install -y tesseract-ocr
+RUN apt-get update && apt-get -y install ffmpeg libsm6 libxext6
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
   https://download.docker.com/linux/debian/gpg
 RUN echo "deb [arch=$(dpkg --print-architecture) \
