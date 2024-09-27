@@ -2,6 +2,7 @@ pipeline {
     agent { 
         node {
             label 'docker-agent-python'
+            args '-u root' 
             }
       }
     triggers {
