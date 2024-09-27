@@ -1,39 +1,42 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-python'
-            }
-      }
-    triggers {
-        pollSCM 'H * * * *'
+    agent {
+        docker {
+            image 'python:3.9-alpine' // Assuming you're using an Alpine-based Python image
+            args '-u root' // Run as root to avoid permission issues with package installs
+        }
     }
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
+                echo "Building..."
                 sh '''
-                ls
-                cat /etc/*-release
-                cd Mat
+                # Install build dependencies in Alpine Linux
+                apk update
+                apk add --no-cache gcc musl-dev python3-dev libffi-dev
+                apk add --no-cache tesseract-ocr tesseract-ocr-dev
+                apk add --no-cache make
+
+                # Install Python dependencies
+                pip install --upgrade pip
+                pip install pytesseract
                 pip install -r requirements.txt
                 '''
             }
         }
         stage('Test') {
             steps {
-                echo "Testing.."
+                echo "Testing..."
                 sh '''
                 cd Mat
                 python3 main.py
-               
                 '''
             }
         }
         stage('Deliver') {
             steps {
-                echo 'Deliver....'
+                echo 'Delivering...'
                 sh '''
-                echo "doing delivery stuff.."
+                echo "doing delivery stuff..."
                 '''
             }
         }
