@@ -1,2 +1,1 @@
---upgrade Pillow
-
+tesseract-ocr
