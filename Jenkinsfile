@@ -1,9 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9-alpine' // Assuming you're using an Alpine-based Python image
-            args '-u root' // Run as root to avoid permission issues with package installs
-        }
+    agent { 
+        node {
+            label 'docker-agent-python'
+            }
+      }
+    triggers {
+        pollSCM 'H * * * *'
     }
     stages {
         stage('Build') {
