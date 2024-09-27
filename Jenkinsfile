@@ -13,6 +13,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 ls
+                cat /etc/*-release
                 cd Mat
                 pip install -r requirements.txt
                 '''
